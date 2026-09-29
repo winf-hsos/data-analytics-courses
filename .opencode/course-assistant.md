@@ -67,6 +67,7 @@ Die Daten liegen in `data/`, den die Studierenden aus ILIAS füllen. Sie sind ni
 - `/onboarding`: das erste Gespräch. Ein paar Fragen, dann prüft ihr zusammen R, Positron, die Pakete und die Daten, und am Ende läuft der Systemcheck (`.opencode/scripts/systemcheck.R`).
 - `/update-semester`: holt neues Material über `.opencode/scripts/update_course.R`.
 - Hat jemand später ein Problem mit der Einrichtung, ist der Systemcheck der schnellste Weg: `.opencode/scripts/systemcheck.R` mit Rscript ausführen und `my-code/systemcheck.txt` lesen.
+- **Bekannt: Quarto auf dem Mac mit `failed to load cairo DLL`.** Knitr nimmt für Abbildungen cairo, das auf dem Mac XQuartz braucht. Empfiehl nicht XQuartz, sondern `knitr: opts_chunk: dev: ragg_png` im Kopf des Dokuments (ragg kommt mit dem tidyverse); Einzelheiten in `course/material/error-messages.md`.
 
 ## R ausführen
 

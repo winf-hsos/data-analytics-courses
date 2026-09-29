@@ -43,6 +43,26 @@ R sucht die Datei an der falschen Stelle. Die Meldung sagt euch sogar, wo es ges
 
 **Tun:** Im Explorer links in Positron nachsehen: Liegt die Datei in `data/`, und steht oben der Name des Kursordners?
 
+## Quarto auf dem Mac: `failed to load cairo DLL`
+
+```
+failed to load cairo DLL
+Quitting from report.qmd:7-11 [fig-test]
+Execution halted
+```
+
+Beim Rendern eines Quarto-Dokuments mit Abbildung. Knitr zeichnet Abbildungen standardmäßig mit dem Grafikgerät cairo, und das braucht auf dem Mac das Zusatzprogramm XQuartz, das kaum jemand installiert hat. In Positron selbst funktionieren Abbildungen trotzdem, weil Positron ein anderes Gerät nimmt.
+
+**Tun:** Nicht XQuartz installieren, sondern im Kopf des Quarto-Dokuments das Grafikgerät ragg einstellen. Das Paket kommt mit dem tidyverse mit:
+
+```yaml
+knitr:
+  opts_chunk:
+    dev: ragg_png
+```
+
+Die Kursvorlage für den Bericht stellt das schon ein. Der Systemcheck erkennt den Fall und meldet ihn als Hinweis.
+
 ## Wenn es keine der drei ist
 
 Kopiert die **ganze** Meldung, auch die Zeilen darüber, und fragt euren Assistenten, was sie bedeutet. Lasst sie euch erklären, und behebt den Fehler dann selbst. Nach einer Woche erkennt ihr die häufigen auf einen Blick.

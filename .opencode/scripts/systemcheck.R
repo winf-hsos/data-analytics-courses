@@ -74,7 +74,13 @@ local({
     out <- tryCatch(
       suppressWarnings(system2(cmd, args, stdout = TRUE, stderr = TRUE)),
       error = function(e) NA_character_)
-    if (length(out) == 0) NA_character_ else trimws(out)
+    if (length(out) == 0) return(NA_character_)
+    # output in another encoding (on Windows often CP850 or CP1252, e.g. an
+    # umlaut in a path) is not valid UTF-8 and would stop trimws(); read such
+    # lines as Latin-1 instead (found with a test on 2026-09-29)
+    bad <- !is.na(out) & !validUTF8(out)
+    if (any(bad)) out[bad] <- iconv(out[bad], from = "latin1", to = "UTF-8", sub = "?")
+    trimws(out)
   }
   ps <- function(command) run("powershell", c("-NoProfile", "-NonInteractive", "-Command", q(command)))
 
@@ -226,12 +232,14 @@ local({
 
     # One render attempt in a fresh temp folder. Without --quiet: that flag
     # also hides Quarto's error messages (reported from macOS on 2026-09-29,
-    # the details only said "unknown"). With quarto_r, Quarto is told where R
-    # is via QUARTO_R instead of searching PATH.
-    render_attempt <- function(quarto_r = NULL) {
+    # the details only said "unknown"). With dev, knitr draws the figure with
+    # that device; with quarto_r, Quarto is told where R is via QUARTO_R
+    # instead of searching PATH.
+    render_attempt <- function(dev = NULL, quarto_r = NULL) {
       tmp <- tempfile("qtest"); dir.create(tmp)
       qmd <- file.path(tmp, "test.qmd")
-      writeLines(c("---", "title: Test", "format: typst", "lang: de", "---", "",
+      knitr_opts <- if (is.null(dev)) character() else c("knitr:", "  opts_chunk:", paste0("    dev: ", dev))
+      writeLines(c("---", "title: Test", "format: typst", "lang: de", knitr_opts, "---", "",
                    "```{r}", "#| label: fig-test", "#| fig-cap: Test", "plot(1:3)", "```"), qmd)
       old_quarto_r <- Sys.getenv("QUARTO_R", unset = NA)
       if (!is.null(quarto_r)) Sys.setenv(QUARTO_R = quarto_r)
@@ -265,19 +273,32 @@ local({
       report("WARNUNG", "Quarto-Rendertest", "fehlgeschlagen", "Quarto lie\u00df sich nicht starten (siehe oben).")
       add_detail("Meldung Rendertest", first$log)
     } else {
-      # second attempt with the path to this R: if that works, Quarto simply
-      # does not find R on its own
-      rscript_here <- file.path(R.home("bin"), if (is_win) "Rscript.exe" else "Rscript")
-      second <- render_attempt(rscript_here)
       add_detail("Meldung Rendertest", first$log)
+      # second attempt with the ragg device. On macOS without XQuartz, knitr's
+      # default png device needs cairo and fails with "failed to load cairo
+      # DLL" (reported on 2026-09-29, Apple M3); ragg comes with the tidyverse
+      # and draws without cairo. The course template sets it for every document.
+      has_ragg <- requireNamespace("ragg", quietly = TRUE)
+      second <- if (has_ragg) render_attempt(dev = "ragg_png") else list(ok = FALSE, log = "ragg nicht installiert")
       if (second$ok) {
-        report("HINWEIS", "Quarto-Rendertest", "klappt, wenn Quarto den Pfad zu R bekommt",
-               "Quarto findet R nicht von selbst. Mit dem Pfad zu R entsteht das PDF. Das richten wir in Sitzung 2 ein; jetzt ist nichts zu tun.")
-        add_detail("Rendertest mit QUARTO_R", "PDF erzeugt")
+        report("HINWEIS", "Quarto-Rendertest", "klappt mit dem Grafikger\u00e4t ragg",
+               paste0("Abbildungen in Quarto brauchen auf diesem Rechner das Grafikger\u00e4t ragg statt cairo. ",
+                      "Die Kursvorlage stellt das ein (knitr: opts_chunk: dev: ragg_png); jetzt ist nichts zu tun."))
+        add_detail("Rendertest mit ragg", "PDF erzeugt")
       } else {
-        report("WARNUNG", "Quarto-Rendertest", "fehlgeschlagen",
-               "Das Test-PDF lie\u00df sich nicht erzeugen, auch nicht mit dem Pfad zu R. Die Meldung steht unten in den Details; bitte in Sitzung 2 zeigen.")
-        add_detail("Rendertest mit QUARTO_R", second$log)
+        # third attempt: ragg and the path to this R
+        rscript_here <- file.path(R.home("bin"), if (is_win) "Rscript.exe" else "Rscript")
+        third <- render_attempt(dev = if (has_ragg) "ragg_png" else NULL, quarto_r = rscript_here)
+        add_detail("Rendertest mit ragg", second$log)
+        if (third$ok) {
+          report("HINWEIS", "Quarto-Rendertest", "klappt, wenn Quarto den Pfad zu R bekommt",
+                 "Quarto findet R nicht von selbst. Mit dem Pfad zu R entsteht das PDF. Das richten wir in Sitzung 2 ein; jetzt ist nichts zu tun.")
+          add_detail("Rendertest mit QUARTO_R", "PDF erzeugt")
+        } else {
+          report("WARNUNG", "Quarto-Rendertest", "fehlgeschlagen",
+                 "Das Test-PDF lie\u00df sich nicht erzeugen, auch nicht mit ragg und dem Pfad zu R. Die Meldung steht unten in den Details; bitte in Sitzung 2 zeigen.")
+          add_detail("Rendertest mit QUARTO_R", third$log)
+        }
       }
     }
   }
@@ -378,7 +399,7 @@ local({
   status <- status[order(sort_order[status$level], seq_len(nrow(status))), ]
   header <- c(
     "SYSTEMCHECK \u00b7 Datenanalyse mit R",
-    paste0("Erstellt: ", format(Sys.time(), "%Y-%m-%d %H:%M"), "  (Skriptfassung 2026-09-30b)"),
+    paste0("Erstellt: ", format(Sys.time(), "%Y-%m-%d %H:%M"), "  (Skriptfassung 2026-09-30c)"),
     "",
     "ZUSAMMENFASSUNG",
     sprintf("  %-8s %-22s %s", status$level, status$check, status$value),
