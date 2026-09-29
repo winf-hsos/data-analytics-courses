@@ -1,0 +1,21 @@
+# Your own work: everything in my-code/ except its README stays yours.
+# Updates never touch it.
+my-code/*
+!my-code/README.md
+
+# Course data comes from ILIAS and is not public.
+data/*
+!data/README.md
+
+# R and Quarto
+.Rhistory
+.RData
+.Rproj.user/
+*_files/
+.quarto/
+
+# Editors and operating systems
+.vscode/
+.positron/
+.DS_Store
+Thumbs.db

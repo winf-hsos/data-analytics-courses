@@ -1,0 +1,6 @@
+# R packages needed by all modules. /onboarding and /update-semester install
+# whatever is missing. One package per line. Module-specific packages go into
+# course/modules/<module>/packages.txt.
+tidyverse
+readxl
+rlang
