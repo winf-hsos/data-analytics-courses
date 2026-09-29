@@ -30,7 +30,7 @@ Die Termine stehen in [NOW.md](NOW.md).
 Aus dem ILIAS-Kurs in `data/` legen, ohne Umbenennen:
 
 - `mds12_schoko_milch.csv`: die Panelbefragung. Beschreibung: [course/datasets/mds12-schoko-milch.md](../../datasets/mds12-schoko-milch.md)
-- `M3b_Musterstudie-quantitativ.pdf`: die Studiendokumentation, das Codebuch
+- `M3b_Musterstudie-quantitativ.pdf`: die Studiendokumentation mit dem Fragebogen
 
 Die Interviewtranskripte aus Herrn Kussins Strang darf der Assistent mit auswerten, nachdem er gefragt hat, ob die Interviewten einverstanden sind und die Transkripte pseudonymisiert sind.
 

@@ -4,3 +4,6 @@
 tidyverse
 readxl
 rlang
+skimr
+janitor
+tidylog

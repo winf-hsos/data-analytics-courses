@@ -1,6 +1,6 @@
 # Der Datensatz: `mds12_schoko_milch.csv`
 
-Eine Online-Panelbefragung, erhoben vom Fachgebiet Agrarmarketing (Herr Enneking) mit dem Panelanbieter bilendi/respondi und programmiert in LimeSurvey. Die vollständige Dokumentation mit jedem Fragetext und jeder Codierung ist die Studiendokumentation `data/M3b_Musterstudie-quantitativ.pdf`, **euer Codebuch**. Die Seitenzahlen unten beziehen sich darauf.
+Eine Online-Panelbefragung, erhoben vom Fachgebiet Agrarmarketing (Herr Enneking) mit dem Panelanbieter bilendi/respondi und programmiert in LimeSurvey. Die vollständige Dokumentation mit jedem Fragetext und jeder Codierung ist die Studiendokumentation `data/M3b_Musterstudie-quantitativ.pdf`, **euer Codebuch**. Die Seitenzahlen unten beziehen sich darauf. Dazu gibt es [mds12-schoko-milch-codebook.md](mds12-schoko-milch-codebook.md): jede Frage des Fragebogens mit ihren Spalten, den Codes und den Werten, die im Datensatz vorkommen. Euer Assistent beantwortet damit Fragen zum Fragebogen, und ihr könnt selbst darin suchen.
 
 Die CSV ist ein Auszug mit den Spezialthemen Milch und Schokolade. Die Studie selbst ist breiter; welche Themen eure Gruppe bekommt, sagt Herr Enneking.
 
@@ -22,7 +22,7 @@ Jeder Variablenname beginnt mit einem Buchstaben, der sagt, zu welchem Block die
 
 | Buchstabe | Block | Beispiel |
 |---|---|---|
-| `q` | Screening und Quoten: Einkauf, Alter, Bundesland, Geschlecht, Osnabrück | `q003land` |
+| `q` | Quotierung und Screening: Einkauf, Alter, Bundesland, Geschlecht, Osnabrück | `q003land` |
 | `v` | Verhalten: was gekauft, wie oft, wo | `v008ort_1discount` |
 | `p` | psychographische Skalen: Einstellungen, Neophobie | `p012neo_1probiere` |
 | `b` | Bewertung von Eigenschaften | `B010midiff7_1quali` |
@@ -31,7 +31,8 @@ Jeder Variablenname beginnt mit einem Buchstaben, der sagt, zu welchem Block die
 | `d` | Demographie: Haushalt, Wohnort, Einkommen, Medien | `d044stadt` |
 | `m` | Spezialthema Milch | |
 | `s` | Spezialthema Schokolade | |
-| `a` | Experimentzuweisung (wer welche Variante gesehen hat) | `AX010midiff7f` |
+| `a` | angereicherte und funktionelle Lebensmittel (Spezialthema) | |
+| `ac`, `ax` | Experimentzuweisung: wer welche Variante gesehen hat, `ac` bis vier Varianten, `ax` ab fünf | `AX010midiff7f` |
 
 Die Blöcke `q`, `v`, `p` und `d` hat jede befragte Person bekommen, egal welches Spezialthema. Mit ihnen arbeitet der Selbsttest.
 
