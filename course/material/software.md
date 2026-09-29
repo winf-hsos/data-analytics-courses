@@ -11,7 +11,7 @@ Vier Programme, alle kostenlos, alle für Windows und macOS. Quarto bringt Posit
 
 ## Die Installation in drei Teilen
 
-**Teil 1** macht ihr von Hand: OpenCode installieren, den Kursordner herunterladen, beides zusammenbringen. **Teil 2** übernimmt euer Assistent mit `/onboarding`: Er prüft R, Positron und die Pakete und lässt den Systemcheck laufen. **Teil 3** ist Positron: den Kursordner dort öffnen. Jeder Schritt von Teil 2 steht hier auch zum Nachlesen.
+**Teil 1** macht ihr von Hand: OpenCode installieren, den Kursordner herunterladen, beides zusammenbringen. **Teil 2** übernimmt euer Assistent mit `/onboarding`: Er sieht nach, ob Positron, R und Quarto schon da sind, installiert mit euch, was fehlt, prüft die Pakete und lässt den Systemcheck laufen. **Teil 3** ist Positron: den Kursordner dort öffnen. Jeder Schritt von Teil 2 steht hier auch zum Nachlesen, für alle, die lieber selbst installieren.
 
 ## Teil 1: bis euer Assistent läuft
 
@@ -49,7 +49,12 @@ In der neuen Sitzung tippt ihr
 /onboarding
 ```
 
-Der Assistent fragt, in welchem Modul ihr seid und was ihr mitbringt, und geht dann Schritt für Schritt mit euch durch, was noch fehlt. Vor jeder Installation sagt er, was er installieren will, und wartet auf euer OK.
+Der Assistent fragt, in welchem Modul ihr seid und was ihr mitbringt. Dann sieht er nach, was schon installiert ist. Fehlt etwas, fragt er, ob er es selbst installieren soll (unter Windows mit winget, auf dem Mac mit Homebrew) oder ob ihr es lieber selbst macht und er euch Schritt für Schritt begleitet. Vor jeder Installation sagt er, was er installieren will, und wartet auf euer OK. Die Reihenfolge ist Positron, R, Quarto.
+
+### Positron
+
+- **Windows:** Auf [positron.posit.co](https://positron.posit.co/download.html) den Windows-Installer (*User*) herunterladen und ausführen.
+- **macOS:** Dort die `.dmg`-Datei herunterladen, öffnen und Positron in den Ordner *Programme* ziehen.
 
 ### R
 
@@ -58,7 +63,11 @@ Nötig ist R 4.4 oder neuer. Wer es neu installiert:
 - **Windows:** [R für Windows](https://cran.r-project.org/bin/windows/base/), *Download R for Windows*, Installer ausführen, alle Voreinstellungen lassen.
 - **macOS:** [R für macOS](https://cran.r-project.org/bin/macosx/), die Fassung für euren Chip (*arm64* für Apple Silicon, *x86_64* für Intel), Paket öffnen, den Schritten folgen.
 
-Danach OpenCode einmal schließen und neu öffnen, damit es R findet, und `/onboarding` noch einmal tippen.
+Danach sucht euer Assistent R noch einmal und macht weiter. Ohne Administratorrechte bietet der Windows-Installer an, R nur für euren Benutzer zu installieren; das genügt.
+
+### Quarto
+
+Quarto kommt mit Positron. Nur wenn der Assistent es danach nicht findet oder es zu alt ist (nötig ist 1.5 oder neuer): von [quarto.org](https://quarto.org/docs/get-started/) den Installer für euer System herunterladen und ausführen.
 
 ### Die Pakete
 

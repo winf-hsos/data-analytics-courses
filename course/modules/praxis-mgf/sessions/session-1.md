@@ -6,7 +6,7 @@ Drei Teile: Erst richten alle ihre Arbeitsumgebung ein, dann gehen wir einmal ge
 
 ## Teil 1: Arbeitsumgebung
 
-1. OpenCode installieren, den Kursordner herunterladen und entpacken, in OpenCode öffnen, `/onboarding` tippen. Jeder Schritt steht in [software.md](../../../material/software.md).
+1. OpenCode installieren, den Kursordner herunterladen und entpacken, in OpenCode öffnen, `/onboarding` tippen. Euer Assistent sieht nach, ob Positron, R und Quarto da sind, und installiert mit euch, was fehlt. Jeder Schritt steht auch in [software.md](../../../material/software.md).
 2. Den Kursordner in **Positron** öffnen: *File > Open Folder…*. Links seht ihr `my-code`, `data` und `course`.
 3. Die Daten aus ILIAS in `data/` legen.
 4. In Positron in `my-code/` eine neue Datei `session_1.R` anlegen. Dort tippt ihr den Code unten mit.
@@ -160,6 +160,6 @@ plot_quota_deviation
 
 ## Teil 3: Selbststudium
 
-Bis Sitzung 2 lernt ihr R im eigenen Tempo, gestaffelt nach Vorkenntnissen: [self-study.md](../self-study.md). Am Anfang steht der Selbsttest in `my-code/self-test/`. Wer ihn gleich besteht, ist fertig.
+Bis Sitzung 2 lernt ihr R im eigenen Tempo: [self-study.md](../self-study.md). Am Anfang steht der Selbsttest in `my-code/self-test/`. Wer ihn besteht, geht gleich zur Abnahme (`/final-check`). Alle anderen arbeiten die Übung in `my-code/self-study/` durch, fünf Kapitel zur Frage „Wo kaufen die Befragten ein, und wer kauft Bio?“, mit Lesestellen aus *R for Data Science*. Euer Assistent begleitet euch mit `/self-study`.
 
 Wenn etwas nicht läuft: [error-messages.md](../../../material/error-messages.md), und euer Assistent.

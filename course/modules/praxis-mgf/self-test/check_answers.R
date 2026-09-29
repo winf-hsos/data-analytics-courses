@@ -31,7 +31,8 @@
     "Code lesen: aufbereitete Variablen",
     "Code lesen: stille Fallausschlüsse",
     "Code lesen: die Basis eines Anteils"),
-  level = c(1, 1, 2, 2, 2, 2, 2, 3, 1, 2, 2),
+  # chapter of the self-study exercise (my-code/self-study/chapter_N.R)
+  chapter = c(2, 2, 3, 3, 2, 2, 2, 4, 3, 2, 2),
   hint = c(
     "count() oder filter() mit nrow(); die Werte von D044stadtf stehen in course/datasets/mds12-schoko-milch.md.",
     "mean() innerhalb von summarise(), oder direkt auf die Spalte.",
@@ -47,7 +48,7 @@
   stringsAsFactors = FALSE
 )
 
-.self_test$study_page <- "course/modules/praxis-mgf/self-study.md"
+.self_test$study_page <- "my-code/self-study/"
 
 # checksums of the correct answers, salted with the task number
 .self_test$expected <- c(
@@ -126,7 +127,7 @@ check_answer <- function(number, answer) {
     message(prefix, "noch nicht.")
     if (!is.null(extra)) message("  ", extra)
     message("  Tipp: ", task$hint)
-    message("  Nacharbeiten: Stufe ", task$level, " in ", .self_test$study_page)
+    message("  Nacharbeiten: Kapitel ", task$chapter, " der \u00dcbung in ", .self_test$study_page)
   }
   invisible(is_correct)
 }
@@ -141,8 +142,8 @@ show_results <- function() {
   if (length(open)) message("  noch nicht geprüft: ", paste(open, collapse = ", "))
   if (length(wrong)) {
     message("  noch nicht richtig: ", paste(wrong, collapse = ", "))
-    levels <- sort(unique(tasks$level[wrong]))
-    message("  Nacharbeiten: Stufe ", paste(levels, collapse = " und "), " in ", .self_test$study_page)
+    chapters <- sort(unique(tasks$chapter[wrong]))
+    message("  Nacharbeiten: Kapitel ", paste(chapters, collapse = " und "), " der \u00dcbung in ", .self_test$study_page)
   }
   if (all(results %in% TRUE)) message("  Alles richtig. Ihr seid bereit für Sitzung 2.")
   message("")

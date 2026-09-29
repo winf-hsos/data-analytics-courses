@@ -23,7 +23,12 @@
       "*Rscript*.opencode/scripts/systemcheck.R*": "allow",
       "*Rscript*.opencode/scripts/update_course.R*": "allow",
       "*Rscript*.opencode\\scripts\\systemcheck.R*": "allow",
-      "*Rscript*.opencode\\scripts\\update_course.R*": "allow"
+      "*Rscript*.opencode\\scripts\\update_course.R*": "allow",
+      "*Rscript*.opencode/scripts/run_script.R my-code/*": "allow",
+      "*Rscript*.opencode\\scripts\\run_script.R my-code*": "allow",
+      "*quarto* --version": "allow",
+      "winget --version": "allow",
+      "brew --version": "allow"
     }
   }
 }
