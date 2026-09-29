@@ -221,21 +221,65 @@ local({
   # to PDF via Typst - exactly the way reports and PDFs are made in the module
   if (!is.na(quarto) && isTRUE(tv_loads)) {
     step("Quarto-Rendertest")
-    tmp <- tempfile("qtest"); dir.create(tmp)
-    qmd <- file.path(tmp, "test.qmd")
-    writeLines(c("---", "title: Test", "format: typst", "lang: de", "---", "",
-                 "```{r}", "#| label: fig-test", "#| fig-cap: Test", "plot(1:3)", "```"), qmd)
-    render_out <- run(quarto, c("render", q(qmd), "--quiet"))
-    render_ok <- file.exists(file.path(tmp, "test.pdf"))
-    if (render_ok) {
-      report("OK", "Quarto-Rendertest", "PDF mit R-Code \u00fcber Typst erzeugt")
-    } else {
-      reason <- if (is.na(q_ver)) "Quarto lie\u00df sich nicht starten (siehe oben)."
-                else "Quarto findet R vermutlich nicht. Das kl\u00e4ren wir in Sitzung 2; die Fehlermeldung steht unten in den Details."
-      report("WARNUNG", "Quarto-Rendertest", "fehlgeschlagen", reason)
-      add_detail("Meldung Rendertest", utils::tail(render_out[!is.na(render_out) & nzchar(render_out)], 3))
+    rscript_on_path <- Sys.which("Rscript")
+    add_detail("Rscript im Suchpfad", if (nzchar(rscript_on_path)) "ja" else "nein")
+
+    # One render attempt in a fresh temp folder. Without --quiet: that flag
+    # also hides Quarto's error messages (reported from macOS on 2026-09-29,
+    # the details only said "unknown"). With quarto_r, Quarto is told where R
+    # is via QUARTO_R instead of searching PATH.
+    render_attempt <- function(quarto_r = NULL) {
+      tmp <- tempfile("qtest"); dir.create(tmp)
+      qmd <- file.path(tmp, "test.qmd")
+      writeLines(c("---", "title: Test", "format: typst", "lang: de", "---", "",
+                   "```{r}", "#| label: fig-test", "#| fig-cap: Test", "plot(1:3)", "```"), qmd)
+      old_quarto_r <- Sys.getenv("QUARTO_R", unset = NA)
+      if (!is.null(quarto_r)) Sys.setenv(QUARTO_R = quarto_r)
+      out <- run(quarto, c("render", q(qmd)))
+      if (!is.null(quarto_r)) {
+        if (is.na(old_quarto_r)) Sys.unsetenv("QUARTO_R") else Sys.setenv(QUARTO_R = old_quarto_r)
+      }
+      ok <- file.exists(file.path(tmp, "test.pdf"))
+      # keep the last lines of the log, without colour codes and without
+      # paths that would reveal the user name
+      log <- out[!is.na(out) & nzchar(out)]
+      log <- gsub("\033\\[[0-9;]*m", "", log)
+      log <- gsub(tmp, "<temp>", log, fixed = TRUE)
+      log <- gsub(normalizePath(tmp, winslash = "/", mustWork = FALSE), "<temp>", log, fixed = TRUE)
+      homes <- unique(c(path.expand("~"), Sys.getenv("HOME"), Sys.getenv("USERPROFILE")))
+      for (home in homes[nzchar(homes)]) {
+        log <- gsub(home, "~", log, fixed = TRUE)
+        log <- gsub(gsub("\\", "/", home, fixed = TRUE), "~", log, fixed = TRUE)
+      }
+      user <- Sys.info()[["user"]]
+      if (!is.na(user) && nchar(user) >= 3) log <- gsub(user, "<user>", log, fixed = TRUE)
+      log <- substr(utils::tail(log, 5), 1, 160)
+      unlink(tmp, recursive = TRUE)
+      list(ok = ok, log = log)
     }
-    unlink(tmp, recursive = TRUE)
+
+    first <- render_attempt()
+    if (first$ok) {
+      report("OK", "Quarto-Rendertest", "PDF mit R-Code \u00fcber Typst erzeugt")
+    } else if (is.na(q_ver)) {
+      report("WARNUNG", "Quarto-Rendertest", "fehlgeschlagen", "Quarto lie\u00df sich nicht starten (siehe oben).")
+      add_detail("Meldung Rendertest", first$log)
+    } else {
+      # second attempt with the path to this R: if that works, Quarto simply
+      # does not find R on its own
+      rscript_here <- file.path(R.home("bin"), if (is_win) "Rscript.exe" else "Rscript")
+      second <- render_attempt(rscript_here)
+      add_detail("Meldung Rendertest", first$log)
+      if (second$ok) {
+        report("HINWEIS", "Quarto-Rendertest", "klappt, wenn Quarto den Pfad zu R bekommt",
+               "Quarto findet R nicht von selbst. Mit dem Pfad zu R entsteht das PDF. Das richten wir in Sitzung 2 ein; jetzt ist nichts zu tun.")
+        add_detail("Rendertest mit QUARTO_R", "PDF erzeugt")
+      } else {
+        report("WARNUNG", "Quarto-Rendertest", "fehlgeschlagen",
+               "Das Test-PDF lie\u00df sich nicht erzeugen, auch nicht mit dem Pfad zu R. Die Meldung steht unten in den Details; bitte in Sitzung 2 zeigen.")
+        add_detail("Rendertest mit QUARTO_R", second$log)
+      }
+    }
   }
 
   # ------------------------------------------------------------------
@@ -334,7 +378,7 @@ local({
   status <- status[order(sort_order[status$level], seq_len(nrow(status))), ]
   header <- c(
     "SYSTEMCHECK \u00b7 Datenanalyse mit R",
-    paste0("Erstellt: ", format(Sys.time(), "%Y-%m-%d %H:%M"), "  (Skriptfassung 2026-09-30)"),
+    paste0("Erstellt: ", format(Sys.time(), "%Y-%m-%d %H:%M"), "  (Skriptfassung 2026-09-30b)"),
     "",
     "ZUSAMMENFASSUNG",
     sprintf("  %-8s %-22s %s", status$level, status$check, status$value),
