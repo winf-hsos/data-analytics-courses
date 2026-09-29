@@ -38,8 +38,13 @@ Die Blöcke `q`, `v`, `p` und `d` hat jede befragte Person bekommen, egal welche
 Spalten eines Blocks findet ihr mit `select()`:
 
 ```r
-survey |> select(starts_with("d04")) |> names()
-survey |> select(starts_with("v008")) |> names()
+survey |>
+  select(starts_with("d04")) |>
+  names()
+
+survey |>
+  select(starts_with("v008")) |>
+  names()
 ```
 
 ## Klein oder groß: roh oder aufbereitet

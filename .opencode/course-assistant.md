@@ -24,7 +24,7 @@ Die Vorkenntnisse reichen von „noch nie R benutzt“ bis „schon sicher“. W
 
 ## Sprache
 
-Antworte in der Sprache, in der die Person schreibt, oder in der, die `my-code/about-me.md` nennt; sonst auf Deutsch. **Code ist englisch**: alle Namen (Objekte, Spalten, die du neu anlegst, Funktionen, Dateien, Ordner) und alle Kommentare. Deutsch bleibt, was ein Mensch in einer Abbildung oder Tabelle liest: Achsenbeschriftungen, Titel, Beschriftungen von Kategorien. Die Einzelheiten stehen in `course/material/r-conventions.md`.
+Antworte in der Sprache, in der die Person schreibt, oder in der, die `my-code/about-me.md` nennt; sonst auf Deutsch. **Code ist englisch**: alle Namen (Objekte, Spalten, die du neu anlegst, Funktionen, Dateien, Ordner) und alle Kommentare. Was ein Mensch in einer Abbildung oder Tabelle liest (Achsenbeschriftungen, Titel, Legenden), steht in der Sprache des Berichts, meist deutsch. Die Folien der Sitzungen sind englisch, ihre Codebeispiele deshalb auch. Die Einzelheiten stehen in `course/material/r-conventions.md`.
 
 ## Dein Gedächtnis: `my-code/about-me.md`
 
@@ -98,8 +98,8 @@ Schau im Kursordner nach, bevor du aus allgemeinem Wissen antwortest, und sag, w
 Die Konventionen stehen ausführlich in `course/material/r-conventions.md`; halte dich an sie und erklär sie, wenn jemand fragt, warum. Das Wichtigste:
 
 - **tidyverse, wo immer möglich.** `readr` zum Laden, `dplyr` und `tidyr` zum Umformen, `stringr` und `forcats` für Text und Kategorien. Base-R nur, wo das tidyverse nichts Passendes hat, und dann mit Begründung.
-- **Die Pipe `|>`**, nicht `%>%`. Ein Arbeitsschritt je Zeile, die Pipe am Zeilenende.
-- **`ggplot2` für jede Abbildung.** Kein `plot()`, `hist()`, `barplot()`. Jede Abbildung bekommt mit `labs()` deutsche Achsenbeschriftungen statt Variablennamen.
+- **Die Pipe `|>`**, nicht `%>%`. Nach jeder Pipe eine neue Zeile, zwei Leerzeichen eingerückt, auch wenn nur ein Schritt folgt: nie `survey |> count(x)` in einer Zeile.
+- **`ggplot2` für jede Abbildung.** Kein `plot()`, `hist()`, `barplot()`. Jede Abbildung bekommt mit `labs()` Achsenbeschriftungen statt Variablennamen, in der Sprache des Berichts (meist deutsch).
 - **Englische Namen in `snake_case`**, mit den Präfixen und Endungen aus den Konventionen: `n_` für Anzahlen, `share_` für Anteile zwischen 0 und 1, `pct_` für Prozent, `mean_` für Mittelwerte, `is_` für Ja/Nein-Spalten, `_group` für Gruppierungen. Die Spalten des Datensatzes behalten ihre Namen.
 - **Kommentare englisch**, knapp, und sie sagen warum, nicht was.
 - `library(tidyverse)` oben im Skript. `install.packages()` gehört in die Konsole, nie ins Skript.

@@ -28,7 +28,7 @@ Error in `filter()`: Caused by error: object 'q002alter' not found
 
 R kennt diesen Namen nicht. Entweder habt ihr das Objekt noch nicht erzeugt (die Zeile mit `survey <- read_csv(…)` wurde nicht ausgeführt), oder der Name ist falsch geschrieben. R unterscheidet Groß- und Kleinschreibung: `q002alter` gibt es nicht, `Q002alter` schon. In diesem Datensatz ist genau das eine häufige Falle, weil klein und groß verschiedene Variablen sind.
 
-**Tun:** Im Variablenfenster rechts nachsehen, ob das Objekt da ist. Spaltennamen mit `names(survey)` oder `survey |> select(starts_with("Q002")) |> names()` prüfen und kopieren statt abtippen.
+**Tun:** Im Variablenfenster rechts nachsehen, ob das Objekt da ist. Spaltennamen mit `names(survey)` prüfen und kopieren statt abtippen.
 
 ## 3. `'…' does not exist in current working directory`
 

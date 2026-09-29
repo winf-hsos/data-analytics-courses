@@ -6,7 +6,7 @@ Diese Konventionen gelten für euren Code und für den Code, den euer Assistent 
 
 Alles, was der Rechner liest, ist englisch: Namen von Objekten, Spalten, die ihr neu anlegt, Funktionen, Dateien und Ordner, und die Kommentare. Englisch ist die Sprache von R, von seinen Paketen, seiner Hilfe und von fast allem, was ihr im Netz dazu findet; euer Code liest sich dann wie der Code, von dem ihr lernt.
 
-**Deutsch bleibt, was ein Mensch in einer Abbildung oder Tabelle liest:** Achsenbeschriftungen, Titel, Legenden, die Beschriftungen von Kategorien („Großstadt“, „60 Jahre und älter“). Das ist Inhalt, kein Code.
+**Was ein Mensch in einer Abbildung oder Tabelle liest, steht in der Sprache, in der ihr berichtet:** Achsenbeschriftungen, Titel, Legenden. Im deutschen Bericht also deutsch, auf den englischen Folien der Sitzungen englisch. Das ist Inhalt, kein Code. Die Werte im Datensatz („Großstadt“, „60 Jahre und älter“) bleiben, wie sie sind.
 
 ```r
 # share of respondents shopping at a discounter, by age group
@@ -86,7 +86,7 @@ survey |>
   count(D044stadtf)
 ```
 
-„Nimm die Umfrage, und dann behalte die ab 60, und dann zähle nach Wohnortgröße.“ Ein Schritt je Zeile, die Pipe am Zeilenende, die folgenden Zeilen zwei Leerzeichen eingerückt. Im Netz seht ihr oft `%>%`; das ist die ältere Fassung. Wir schreiben `|>`.
+„Nimm die Umfrage, und dann behalte die ab 60, und dann zähle nach Wohnortgröße.“ **Nach jeder Pipe beginnt eine neue Zeile**, zwei Leerzeichen eingerückt, auch wenn nur ein Schritt folgt: `survey |>` und darunter `  count(D044stadtf)`, nicht beides in einer Zeile. So steht jeder Schritt für sich, und ein weiterer lässt sich einfügen, ohne die Zeile umzubauen. Im Netz seht ihr oft `%>%`; das ist die ältere Fassung. Wir schreiben `|>`.
 
 ## 7. Abbildungen mit ggplot2
 
@@ -111,7 +111,8 @@ Jede Abbildung entsteht mit `ggplot2`, keine mit `plot()`, `hist()` oder `barplo
 
 ```r
 # who is missing, and why? (only milk drinkers were asked)
-survey |> count(is_missing = is.na(v007freq3_mi))
+survey |>
+  count(is_missing = is.na(v007freq3_mi))
 ```
 
 Schreibt als Kommentar dazu, wie viele Fälle wegfallen und warum. Im Bericht gehört das in den Methodenteil.
