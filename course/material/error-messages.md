@@ -53,15 +53,15 @@ Execution halted
 
 Beim Rendern eines Quarto-Dokuments mit Abbildung. Knitr zeichnet Abbildungen standardmäßig mit dem Grafikgerät cairo, und das braucht auf dem Mac das Zusatzprogramm XQuartz, das kaum jemand installiert hat. In Positron selbst funktionieren Abbildungen trotzdem, weil Positron ein anderes Gerät nimmt.
 
-**Tun:** Nicht XQuartz installieren, sondern im Kopf des Quarto-Dokuments das Grafikgerät ragg einstellen. Das Paket kommt mit dem tidyverse mit:
+**Tun:** XQuartz installieren, einmal, dann klappt es in jedem Dokument. Sagt eurem Assistenten „Installier bitte XQuartz“: Er lädt es herunter und öffnet das Installationsprogramm; ihr klickt durch und gebt das Passwort eures Macs ein. Von Hand: [xquartz.org](https://www.xquartz.org), Download-Knopf, die `.pkg`-Datei öffnen. Der Systemcheck erkennt den Fall und meldet „XQuartz fehlt“.
+
+Nur wenn ihr auf eurem Mac nichts installieren dürft: Im Kopf des Quarto-Dokuments das Grafikgerät ragg einstellen, das mit dem tidyverse schon da ist:
 
 ```yaml
 knitr:
   opts_chunk:
     dev: ragg_png
 ```
-
-Die Kursvorlage für den Bericht stellt das schon ein. Der Systemcheck erkennt den Fall und meldet ihn als Hinweis.
 
 ## Wenn es keine der drei ist
 

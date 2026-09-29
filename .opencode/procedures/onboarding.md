@@ -79,6 +79,8 @@ Führ `"<rscript>" .opencode/scripts/systemcheck.R` im Kursordner aus. Er prüft
 - Ein **HINWEIS** zum Cloud-Ordner (OneDrive, iCloud) ist kein Fehler. Erwähn ihn in einem Satz und geh weiter.
 - Scheitert nur der Quarto-Rendertest und sagt die `NOW.md`, dass Quarto erst später kommt, ist das für heute kein Hindernis. Sag das und notier es in `about-me.md`.
 
+- **Meldet der Check auf einem Mac „XQuartz fehlt“**, installiere XQuartz mit der Person, genau wie in `.opencode/procedures/xquartz.md` beschrieben, und lass den Check danach noch einmal laufen. Ohne XQuartz scheitern auf dem Mac alle Abbildungen in Quarto.
+
 Lässt sich etwas jetzt nicht beheben, sag klar, was fehlt, dass das in der ersten Sitzung normal ist, und dass die Person es Nicolas zeigen soll. Notier es in `about-me.md`.
 
 ## 8. Die erste Zeile R

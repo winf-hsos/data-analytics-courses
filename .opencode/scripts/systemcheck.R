@@ -266,6 +266,10 @@ local({
       list(ok = ok, log = log)
     }
 
+    # XQuartz: R's cairo devices need it on macOS; knitr uses them when Quarto renders
+    xquartz_here <- is_mac && (dir.exists("/Applications/Utilities/XQuartz.app") || dir.exists("/opt/X11/lib"))
+    if (is_mac) add_detail("XQuartz", if (xquartz_here) "installiert" else "fehlt")
+
     first <- render_attempt()
     if (first$ok) {
       report("OK", "Quarto-Rendertest", "PDF mit R-Code \u00fcber Typst erzeugt")
@@ -280,10 +284,16 @@ local({
       # and draws without cairo. The course template sets it for every document.
       has_ragg <- requireNamespace("ragg", quietly = TRUE)
       second <- if (has_ragg) render_attempt(dev = "ragg_png") else list(ok = FALSE, log = "ragg nicht installiert")
-      if (second$ok) {
+      cairo_failed <- any(grepl("cairo", first$log, ignore.case = TRUE))
+      if (second$ok && is_mac && (cairo_failed || !xquartz_here)) {
+        # on a Mac this is XQuartz missing: install it once, then every
+        # document renders without any entry in its header
+        report("WARNUNG", "Quarto-Rendertest", "XQuartz fehlt (macOS)", "In OpenCode euren Kursassistenten bitten: \u201eInstallier bitte XQuartz\u201c. Danach den Systemcheck wiederholen.")
+        add_detail("Rendertest mit ragg", "PDF erzeugt: au\u00dfer XQuartz fehlt nichts")
+      } else if (second$ok) {
         report("HINWEIS", "Quarto-Rendertest", "klappt mit dem Grafikger\u00e4t ragg",
-               paste0("Abbildungen in Quarto brauchen auf diesem Rechner das Grafikger\u00e4t ragg statt cairo. ",
-                      "Die Kursvorlage stellt das ein (knitr: opts_chunk: dev: ragg_png); jetzt ist nichts zu tun."))
+               paste0("Abbildungen in Quarto brauchen auf diesem Rechner das Grafikger\u00e4t ragg statt cairo: ",
+                      "im Kopf des Dokuments knitr: opts_chunk: dev: ragg_png eintragen."))
         add_detail("Rendertest mit ragg", "PDF erzeugt")
       } else {
         # third attempt: ragg and the path to this R
@@ -399,7 +409,7 @@ local({
   status <- status[order(sort_order[status$level], seq_len(nrow(status))), ]
   header <- c(
     "SYSTEMCHECK \u00b7 Datenanalyse mit R",
-    paste0("Erstellt: ", format(Sys.time(), "%Y-%m-%d %H:%M"), "  (Skriptfassung 2026-09-30c)"),
+    paste0("Erstellt: ", format(Sys.time(), "%Y-%m-%d %H:%M"), "  (Skriptfassung 2026-09-30d)"),
     "",
     "ZUSAMMENFASSUNG",
     sprintf("  %-8s %-22s %s", status$level, status$check, status$value),
