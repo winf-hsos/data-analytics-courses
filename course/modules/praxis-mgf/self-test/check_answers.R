@@ -6,9 +6,10 @@
 #  belongs to the course and is replaced by every /update-semester.
 #
 #  The correct answers are not stored in plain text, only as checksums
-#  (rlang::hash). Checking an answer computes the same checksum and
-#  compares. Numbers are rounded to one decimal first, letters are
-#  lower-cased.
+#  (MD5 from base R, tools::md5sum). Checking an answer computes the same
+#  checksum and compares. Numbers are rounded to one decimal first,
+#  letters are lower-cased. Not rlang::hash: its result changed with
+#  rlang 1.3.0, and every answer was suddenly "noch nicht".
 #
 #  Messages to students are German; umlauts are written as \u escapes
 #  so the file runs the same under any encoding.
@@ -52,17 +53,22 @@
 
 # checksums of the correct answers, salted with the task number
 .self_test$expected <- c(
-  "1" = "1aabbbef4d78e437953b98619959fa99", "2" = "80d69d45767d0a7912896441646fe91d",
-  "3" = "89a7c10d7af0da29c8de3a770256633a", "4" = "a7600d136b8129037d589ed07a0aa7e1",
-  "5" = "d2b2d6381822b89c9d39942109f20524", "6" = "c68c4c03d6c75f4069735f9721a51f2e",
-  "7" = "736ebcd19cfff756de95c7e1cda57cf0", "9" = "dfe5a68d70014ae4d173dc58a6405b34",
-  "10" = "2785354e6f2ee74c1f154e9674678a7d", "11" = "109169d48729108009eb998d3e5531a7")
+  "1" = "06c131cb00477b64637a40eec7781743", "2" = "bbb4177ff7c8ede063978a95e0adc8e0",
+  "3" = "c21fe90d968765cb18fb24ab87f5eec8", "4" = "1af7e592fe0c082720b2c64b046ed07b",
+  "5" = "7fd7d0e482752985c4e708224a35394c", "6" = "dd7b4b6a831a9449261166e829087515",
+  "7" = "bb20e64c619cd0bb568c68d701637629", "9" = "5fc039684d3805e442f4c99fc0d2a649",
+  "10" = "2bbd990c5281146712e9b88561c2d03d", "11" = "0baa435477adb894f640c2f544a78150")
 
 .self_test$normalize <- function(x) {
   if (is.numeric(x)) format(round(x, 1), nsmall = 1, trim = TRUE)
   else tolower(trimws(as.character(x)))
 }
-.self_test$checksum <- function(number, x) rlang::hash(paste0(number, ":", .self_test$normalize(x)))
+.self_test$checksum <- function(number, x) {
+  file <- tempfile("self_test_")
+  on.exit(unlink(file))
+  writeBin(charToRaw(enc2utf8(paste0(number, ":", .self_test$normalize(x)))), file)
+  unname(tools::md5sum(file))
+}
 
 # task 8: the bars must show respondents per age group, and both axes
 # need a label that is not a variable name
