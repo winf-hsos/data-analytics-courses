@@ -43,6 +43,16 @@ R sucht die Datei an der falschen Stelle. Die Meldung sagt euch sogar, wo es ges
 
 **Tun:** Im Explorer links in Positron nachsehen: Liegt die Datei in `data/`, und steht oben der Name des Kursordners?
 
+## 4. `there is no package called '…'`
+
+```
+Error in library(psych) : there is no package called 'psych'
+```
+
+Das Paket ist auf eurem Rechner nicht installiert. `library()` lädt nur, was schon da ist. Die Pakete, die ein Modul braucht, installiert euer Assistent mit dem Kursordner, auch die für einzelne Teile wie die Statistik bei Herrn Enneking.
+
+**Tun:** Sagt eurem Assistenten `/update-semester`. Das holt das neueste Material und installiert alle Pakete, die fehlen. Ein Paket, das in keinem Modul vorkommt, installiert ihr einmal in der Konsole mit `install.packages("<name>")`, nie im Skript. Für `ufs` geht das nicht mehr, weil es nicht mehr auf CRAN liegt; das übernimmt `/update-semester`.
+
 ## Quarto auf dem Mac: `failed to load cairo DLL`
 
 ```
@@ -63,6 +73,6 @@ knitr:
     dev: ragg_png
 ```
 
-## Wenn es keine der drei ist
+## Wenn es keine davon ist
 
 Kopiert die **ganze** Meldung, auch die Zeilen darüber, und fragt euren Assistenten, was sie bedeutet. Lasst sie euch erklären, und behebt den Fehler dann selbst. Nach einer Woche erkennt ihr die häufigen auf einen Blick.

@@ -29,7 +29,8 @@
 #   my-code/<name>/ if that does not exist yet. Never overwritten.
 # - R packages listed in course/packages.txt and, if present, in
 #   course/modules/<id>/packages.txt (one name per line, # starts a
-#   comment) are installed if missing.
+#   comment) are installed if missing. "name archive:<version>" installs a
+#   package that was removed from CRAN from the CRAN archive.
 # - Without a known module no templates are copied and only
 #   course/packages.txt is used.
 #
@@ -490,6 +491,28 @@ local({
     personal
   }
 
+  # Packages that were removed from CRAN are listed as "name archive:<version>"
+  # and installed from the CRAN archive as source. That works without compilers
+  # only for packages without compiled code (NeedsCompilation: no); check that
+  # before adding one. Their dependencies come from CRAN as usual.
+  archive_url <- function(p, version) {
+    paste0(CRAN, "/src/contrib/Archive/", p, "/", p, "_", version, ".tar.gz")
+  }
+
+  # Downloads an archived package; returns the path of the tarball and the
+  # packages it needs (Depends, Imports, LinkingTo).
+  fetch_archived <- function(p, version) {
+    tarball <- file.path(tempdir(), paste0(p, "_", version, ".tar.gz"))
+    utils::download.file(archive_url(p, version), tarball, quiet = TRUE, mode = "wb")
+    exdir <- file.path(tempdir(), paste0("archive_", p))
+    utils::untar(tarball, files = paste0(p, "/DESCRIPTION"), exdir = exdir)
+    d <- read.dcf(file.path(exdir, p, "DESCRIPTION"))
+    fields <- intersect(c("Depends", "Imports", "LinkingTo"), colnames(d))
+    deps <- unlist(strsplit(paste(d[1, fields], collapse = ","), ","))
+    deps <- trimws(sub("\\(.*$", "", deps))
+    list(tarball = tarball, deps = setdiff(deps[nzchar(deps)], "R"))
+  }
+
   # Returns list(lines = result lines, problem = TRUE/FALSE).
   check_packages <- function(root, module) {
     lists <- "course/packages.txt"
@@ -500,17 +523,25 @@ local({
     lines <- character()
     problem <- FALSE
     pkgs <- character()
+    archived <- character()  # name -> version in the CRAN archive
     for (l in lists) {
       entries <- readLines(join_path(root, l), warn = FALSE, encoding = "UTF-8")
       entries <- trimws(sub("#.*$", "", entries))
       entries <- unique(entries[nzchar(entries)])
-      invalid <- entries[!grepl("^[A-Za-z][A-Za-z0-9.]*[A-Za-z0-9]$", entries)]
-      if (length(invalid)) {
+      parts <- strsplit(entries, "[[:space:]]+")
+      name <- vapply(parts, function(x) x[1], "")
+      source <- vapply(parts, function(x) if (length(x) > 1) x[2] else "", "")
+      valid <- grepl("^[A-Za-z][A-Za-z0-9.]*[A-Za-z0-9]$", name) &
+        lengths(parts) <= 2 & (source == "" | grepl("^archive:[0-9][0-9.-]*$", source))
+      if (any(!valid)) {
         lines <- c(lines, paste0("PROBLEM: In ", l, " stehen ung\u00fcltige Paketnamen: ",
-                                 paste(invalid, collapse = ", "), "."))
+                                 paste(entries[!valid], collapse = ", "), "."))
         problem <- TRUE
       }
-      pkgs <- unique(c(pkgs, setdiff(entries, invalid)))
+      for (i in which(valid & source != "")) {
+        if (!name[i] %in% names(archived)) archived[name[i]] <- sub("^archive:", "", source[i])
+      }
+      pkgs <- unique(c(pkgs, name[valid]))
     }
     if (!length(pkgs)) return(list(lines = lines, problem = problem))
     installed <- function(p) nzchar(system.file(package = p))
@@ -527,8 +558,25 @@ local({
       withCallingHandlers(
         tryCatch({
           location <- install_location()
-          utils::capture.output(
-            utils::install.packages(missing, lib = location, repos = CRAN, quiet = TRUE))
+          from_archive <- intersect(missing, names(archived))
+          if (length(from_archive)) {
+            # back on CRAN? Then the normal way is better
+            on_cran <- rownames(utils::available.packages(repos = CRAN))
+            from_archive <- setdiff(from_archive, on_cran)
+          }
+          fetched <- lapply(from_archive, function(p) fetch_archived(p, archived[[p]]))
+          deps <- unique(unlist(lapply(fetched, `[[`, "deps")))
+          from_cran <- union(setdiff(missing, from_archive), deps)
+          from_cran <- from_cran[!vapply(from_cran, installed, logical(1))]
+          if (length(from_cran)) {
+            utils::capture.output(
+              utils::install.packages(from_cran, lib = location, repos = CRAN, quiet = TRUE))
+          }
+          for (f in fetched) {
+            utils::capture.output(
+              utils::install.packages(f$tarball, lib = location, repos = NULL,
+                                      type = "source", quiet = TRUE))
+          }
         }, error = function(e) {
           messages <<- c(messages, conditionMessage(e))
         }),

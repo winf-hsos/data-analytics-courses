@@ -1,11 +1,12 @@
 # Wo das Semester steht
 
-Stand: 2026-09-30, Sitzung 1
+Stand: 2026-10-13, nach Sitzung 1, Statistik-Strang bei Herrn Enneking
 
 ## Aktuell
 
 - **Sitzung 1 (30. September): Datenanalyse mit R, Arbeitsumgebung, Auffrischung und Selbststudium.** Alle werden arbeitsfähig: OpenCode installieren, den Kursordner herunterladen, `/onboarding`. Du siehst nach, ob Positron, R und Quarto da sind, installierst mit ihnen, was fehlt, prüfst Pakete und Daten und lässt den Systemcheck laufen, einschließlich Quarto-Rendertest. Dann öffnen sie den Kursordner in Positron. Danach ein gemeinsamer Durchstich von Daten laden bis Abbildung, Schritt für Schritt in `my-code/session_1.R`. Der Code dazu steht in `course/modules/praxis-mgf/sessions/session-1.md`. Wer in der Sitzung nicht fertig wird, holt `/onboarding` und den Durchstich zu Hause nach; du hilfst dabei.
 - **Selbststudium bis Sitzung 2**, beschrieben in `course/modules/praxis-mgf/self-study.md`: der Selbsttest in `my-code/self-test/self_test.R` als Eingang, die Übung in fünf Kapiteln in `my-code/self-study/`, der Selbsttest noch einmal, dann die Abnahme. Begleitung mit `/self-study`, Abschluss mit `/final-check`. Den Selbsttest löst du nicht für sie (siehe deine Anweisungen); bei der Übung hilfst du in Stufen.
+- **Herrn Ennekings Statistik-Strang läuft seit dem 7. Oktober.** Statistische Tests und Modelle kommen von ihm. Hilf beim Code, aber greif seiner Methodenwahl nicht vor. Seine R-Pakete (psych, car, sjmisc, ufs, emmeans, FactoMineR, REdaS, GPArotation und andere) stehen in `course/modules/praxis-mgf/packages.txt`. Wer das Onboarding vor dem 13. Oktober gemacht hat, hat sie noch nicht; schlag `/update-semester` vor, sobald es um seinen Strang geht oder R eines davon vermisst.
 - **Nächste Sitzung (11. November): Forschungsfragen, wissenschaftliche Berichte und Quarto.** Dann schreiben alle ihr erstes Quarto-Dokument, und es gibt den Kursschlüssel für ein stärkeres Sprachmodell.
 
 ## Bisher behandelt
@@ -17,7 +18,6 @@ Stand: 2026-09-30, Sitzung 1
 
 - **Quarto-Dokumente** kommen in Sitzung 2. Installiert und geprüft wird Quarto schon beim `/onboarding`; geschrieben wird bis dahin in R-Skripten (`.R`). Fragt jemand nach Quarto-Dokumenten, hilf, aber führ sie nicht von dir aus ein.
 - **Interviewtranskripte** aus Herrn Kussins Strang: Die Interviews werden erst noch geführt und von Hand ausgewertet. Mit KI ausgewertet werden sie in Sitzung 4. Kommt jemand vorher damit, hilf, aber frag zuerst nach dem Einverständnis der Interviewten (siehe deine Anweisungen).
-- Statistische Tests und Modelle kommen aus Herrn Ennekings Strang (ab 7. Oktober). Hilf beim Code, aber greif seiner Methodenwahl nicht vor.
 
 ## Feste Werte
 

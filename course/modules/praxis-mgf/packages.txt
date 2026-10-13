@@ -1,0 +1,19 @@
+# R packages for Mr Enneking's statistics strand (list as he sent it,
+# 2026-10-13). Packages from course/packages.txt are listed again on purpose,
+# so this list stays complete. stats is part of R and always present; dplyr
+# and purrr come with the tidyverse.
+tidyverse
+psych
+stats
+car
+sjmisc
+janitor
+# ufs was removed from CRAN on 2026-08-28 (a documentation note was not fixed
+# in time). Pure R code, so it installs from the archive without compilers.
+ufs archive:25.7.1
+emmeans
+FactoMineR
+dplyr
+purrr
+REdaS
+GPArotation
