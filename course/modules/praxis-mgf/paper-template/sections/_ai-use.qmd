@@ -1,0 +1,13 @@
+# Anhang: Angaben zur KI-Nutzung {.unnumbered}
+
+<!--
+Hier steht, wofür ihr KI-Werkzeuge genutzt habt: welches Werkzeug und
+Modell, wobei (Code, Auswertung, Formulierung, Gliederung, Literatur),
+in welchen Abschnitten, und wie ihr die Ergebnisse geprüft habt.
+Ihr steht für alles im Bericht ein, auch für das, was ein Agent
+geschrieben hat.
+-->
+
+| Werkzeug und Modell | Wofür | Abschnitte | Wie geprüft |
+|---|---|---|---|
+| OpenCode (Modell) | | | |

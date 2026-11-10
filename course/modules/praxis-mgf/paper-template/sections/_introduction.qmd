@@ -1,0 +1,14 @@
+# Einleitung {#sec-introduction}
+
+<!--
+Was hierher gehört: das Thema und warum es wichtig ist, was man darüber
+schon weiß (mit Quellen), die Lücke, die euer Bericht füllt, und am Ende
+die Forschungsfrage. Keine Ergebnisse, keine Methodendetails.
+Zitieren: [@doering2023, S. 150] erzeugt „(Döring 2023, S. 150)“, die
+Quelle steht in references.bib.
+-->
+
+Hier beschreibt ihr das Thema und ordnet es ein. Was eine gute
+Forschungsfrage ausmacht, steht etwa bei @doering2023.
+
+**Forschungsfrage:** FORSCHUNGSFRAGE

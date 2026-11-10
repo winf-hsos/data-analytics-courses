@@ -1,0 +1,7 @@
+# Fazit {#sec-conclusion}
+
+<!--
+Was hierher gehört: die Antwort auf die Forschungsfrage in wenigen Sätzen
+und was daraus folgt, für die Praxis oder für weitere Forschung. Nichts
+Neues, was nicht vorher schon stand.
+-->

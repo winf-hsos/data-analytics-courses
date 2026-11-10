@@ -1,0 +1,64 @@
+---
+# The central document of your report. It holds the settings and pulls in
+# the sections from sections/; you write the text in those files.
+# Render it in Positron with "Preview" (or ask the course assistant).
+title: "Arbeitstitel des Berichts"
+subtitle: "Spezialthema"
+author:
+  - name: "Vorname Nachname"
+    affiliations: "Hochschule Osnabrück"
+date: today
+date-format: "D. MMMM YYYY"
+lang: de
+abstract: |
+  Drei bis fünf Sätze: Forschungsfrage, Daten, Vorgehen, wichtigstes
+  Ergebnis und was daraus folgt. Schreibt das Abstract zuletzt.
+format:
+  typst:
+    papersize: a4
+    margin:
+      x: 2.5cm
+      y: 2.5cm
+    fontsize: 11pt
+    section-numbering: "1.1"
+    toc: true
+bibliography: references.bib
+# Citations and the list of references in author-year style; the list
+# appears where the #refs block below stands.
+citeproc: true
+execute:
+  echo: false
+  warning: false
+  message: false
+knitr:
+  opts_knit:
+    # Run all code from the course folder, so data paths start with data/
+    # exactly as in your R scripts.
+    root.dir: "../.."
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(tidyverse)
+theme_set(theme_minimal())
+
+survey <- read_csv("data/mds12_schoko_milch.csv", show_col_types = FALSE)
+```
+
+{{< include sections/_introduction.qmd >}}
+
+{{< include sections/_methods.qmd >}}
+
+{{< include sections/_results.qmd >}}
+
+{{< include sections/_discussion.qmd >}}
+
+{{< include sections/_conclusion.qmd >}}
+
+# Literatur {.unnumbered}
+
+::: {#refs}
+:::
+
+{{< include sections/_ai-use.qmd >}}

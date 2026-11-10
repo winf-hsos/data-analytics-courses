@@ -1,0 +1,33 @@
+# Methode {#sec-methods}
+
+<!--
+Was hierher gehört: woher die Daten kommen und wie sie erhoben wurden,
+welche Variablen ihr nutzt und wie ihr sie aufbereitet habt, wie ihr
+ausgewertet habt (und mit welchen Werkzeugen), bei den Interviews auch
+Auswahl, Leitfaden und Codierung. So genau, dass jemand anderes es
+wiederholen könnte. Keine Ergebnisse.
+-->
+
+## Daten
+
+Grundlage ist eine Online-Befragung mit `r nrow(survey)` Personen.
+
+<!--
+So kommt eine Zahl aus R in den Text: `r nrow(survey)`. Ändern sich die
+Daten, ändert sich die Zahl beim nächsten Rendern von selbst.
+-->
+
+## Auswertung
+
+Die Auswertung erfolgt in R [@wickham2023] mit Quarto.
+
+<!--
+Formeln schreibt ihr wie in LaTeX zwischen Dollarzeichen, im Satz mit
+einem, als eigene Zeile mit zweien:
+-->
+
+Der Mittelwert einer Variablen $x$ über $n$ Personen ist
+
+$$
+\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i .
+$$

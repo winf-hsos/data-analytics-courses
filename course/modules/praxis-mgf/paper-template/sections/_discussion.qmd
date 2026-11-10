@@ -1,0 +1,12 @@
+# Diskussion {#sec-discussion}
+
+<!--
+Was hierher gehört: was die Ergebnisse für eure Forschungsfrage bedeuten,
+wie sie zu dem passen, was man schon weiß, und wo Befragung und Interviews
+einander stützen oder widersprechen. Dann die Grenzen eurer Arbeit:
+was die Daten und ihre Erhebung nicht hergeben, und was das für eure
+Aussagen heißt (eigener Unterabschnitt).
+Trennt sauber: Ergebnis, Interpretation, Empfehlung.
+-->
+
+## Grenzen der Arbeit

@@ -1,0 +1,36 @@
+# Ergebnisse {#sec-results}
+
+<!--
+Was hierher gehört: was ihr gefunden habt, in Zahlen, Abbildungen und
+Tabellen, in der Reihenfolge der Forschungsfrage. Noch keine Deutung, die
+gehört in die Diskussion.
+Jede Abbildung und Tabelle braucht ein label (fig-… oder tbl-…) und eine
+Beschriftung; im Text verweist ihr mit @fig-… und @tbl-… darauf.
+Die beiden Beispiele unten dürft ihr löschen, sobald ihr eigene habt.
+-->
+
+@fig-age-groups zeigt, wie sich die Befragten auf die Altersgruppen
+verteilen, @tbl-age-groups dieselben Zahlen als Tabelle.
+
+```{r}
+#| label: fig-age-groups
+#| fig-cap: "Befragte nach Altersgruppe"
+#| fig-width: 6
+#| fig-height: 3.5
+survey |>
+  ggplot(aes(x = Q002altergru4f)) +
+  geom_bar() +
+  labs(x = "Altersgruppe", y = "Anzahl Befragte")
+```
+
+```{r}
+#| label: tbl-age-groups
+#| tbl-cap: "Befragte nach Altersgruppe"
+survey |>
+  count(Q002altergru4f) |>
+  mutate(pct = round(100 * n / sum(n), 1)) |>
+  knitr::kable(
+    col.names = c("Altersgruppe", "Anzahl", "Anteil in %"),
+    format.args = list(decimal.mark = ",")
+  )
+```

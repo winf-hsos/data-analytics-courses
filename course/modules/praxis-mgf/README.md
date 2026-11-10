@@ -19,7 +19,7 @@ Methodenfragen zu Tests und Modellen gehören in Herrn Ennekings Strang, Fragen 
 ## Nicolas' vier Sitzungen
 
 1. Datenanalyse mit R: Arbeitsumgebung, Auffrischung und Selbststudium
-2. Forschungsfragen, wissenschaftliche Berichte und Quarto
+2. Forschungsfragen, wissenschaftliche Paper und Quarto
 3. KI-Agenten in der empirischen Forschung
 4. Forschungsergebnisse präsentieren
 
