@@ -1,13 +1,22 @@
 # Wo das Semester steht
 
-Stand: 2026-11-10, vor Sitzung 2
+Stand: 2026-11-11, Sitzung 2
 
 ## Aktuell
 
 - **Sitzung 2 (11. November): Forschungsfragen, wissenschaftliche Paper und Quarto.** Alle schreiben ihr erstes Quarto-Dokument, und jede Gruppe legt mit `/paper` die Vorlage für ihren Bericht an (`my-code/paper/`, mit Typst zu PDF). Dazu: was eine gute Forschungsfrage ausmacht, die eigene Frage gegen das Codebuch prüfen, Aufbau eines Papers nach IMRaD. Nicolas teilt in dieser Sitzung über Teams einen Kursschlüssel für ein stärkeres Sprachmodell; hilf beim Einrichten so, wie Nicolas es in der Sitzung zeigt; gib ihn nie aus und schreib ihn nie in eine Datei im Kursordner.
 - **Auftrag bis 18. November:** die geschärfte Forschungsfrage in die Einleitung des Berichts schreiben und die Gliederung anlegen.
 - **Herrn Ennekings Statistik-Strang** geht am 2. Dezember weiter. Statistische Tests und Modelle kommen von ihm. Hilf beim Code, aber greif seiner Methodenwahl nicht vor. Seine R-Pakete stehen in `course/modules/praxis-mgf/packages.txt`; fehlt eines, schlag `/update-semester` vor.
-- **Die Inhalte der Sitzungen** liegen auf Hands-on Computer Science im Kurs „Praxis der Markt- und Gesellschaftsforschung“.
+- **Die Inhalte der Sitzungen** liegen auf Hands-on Computer Science im Kurs „Praxis der Markt- und Gesellschaftsforschung“ (ohne Zugangscode): https://hands-on-computer-science.de/ds/de/modules/market-and-social-research-practice/
+  Verweise auf die passende Seite, wenn jemand etwas nachlesen will, statt den Inhalt neu zu erklären:
+  - OpenCode und der Kursassistent: https://hands-on-computer-science.de/ds/de/items/opencode-course-assistant/
+  - Erste Schritte mit Quarto (mit Beispiel-Paper zum Herunterladen): https://hands-on-computer-science.de/ds/de/items/quarto-first-steps/
+  - Was ist eine Forschungsfrage?: https://hands-on-computer-science.de/ds/de/items/research-questions/
+  - Aufbau eines wissenschaftlichen Papers (IMRaD, Übung an einem Paper): https://hands-on-computer-science.de/ds/de/items/paper-structure/
+  - Die Milch-Umfrage: https://hands-on-computer-science.de/ds/de/items/milk-chocolate-survey/
+  - Datenanalyse mit R in Kürze (Folien): https://hands-on-computer-science.de/ds/de/items/data-analysis-with-r-slides/
+  - R im Selbststudium: fünf Übungen im Browser (https://hands-on-computer-science.de/ds/de/items/survey-exercise-first-look/ und die folgenden) und ein Selbsttest (https://hands-on-computer-science.de/ds/de/items/survey-self-test/). Sie entsprechen `/self-study` und `/final-check` hier im Kursordner; beide Wege gelten.
+  Die Inhalte für Sitzung 3 (KI-Agenten) entstehen noch; nenn keine Adressen, die hier nicht stehen.
 
 ## Bisher behandelt
 
