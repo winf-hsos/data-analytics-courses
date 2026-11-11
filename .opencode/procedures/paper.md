@@ -39,7 +39,7 @@ Führ aus: `"<rscript>" .opencode/scripts/render_paper.R`. Es findet Quarto, ren
 Kurz, in der Sprache der Person:
 
 - `paper.qmd` ist das zentrale Dokument: oben die Einstellungen (Titel, Autoren, Abstract, PDF über Typst), darunter das Laden der Daten und die Abschnitte, die mit `{{< include … >}}` eingefügt werden. Gerendert wird immer nur `paper.qmd`, in Positron mit **Preview**.
-- In `sections/` steht je Abschnitt eine Datei: Einleitung, Methode, Ergebnisse, Diskussion, Fazit und der Anhang zur KI-Nutzung. Die Kommentare `<!-- … -->` darin sagen, was in den Abschnitt gehört; im PDF erscheinen sie nicht.
+- In `sections/` steht je Abschnitt eine Datei: Einleitung, Methode, Ergebnisse, Diskussion, Fazit und der Anhang zur KI-Nutzung. Die Kommentare `<!-- … -->` darin sagen, was in den Abschnitt gehört; im PDF erscheinen sie nicht. Mehr dazu in der Lektion „Aufbau eines wissenschaftlichen Papers“ (https://hands-on-computer-science.de/ds/de/items/paper-structure/); eine Rückmeldung zum Aufbau gibt `/paper-feedback`.
 - Der Code läuft vom Kursordner aus, Daten also wie in den Skripten mit `read_csv("data/…")`. Das Laden steht einmal oben in `paper.qmd`; die Abschnitte nutzen `survey` von dort.
 - Was die Beispiele zeigen: eine Zahl aus R im Text (Inline-R), eine Formel, eine Abbildung und eine Tabelle mit Beschriftung und Querverweis (`@fig-…`, `@tbl-…`), Zitate aus `references.bib` (`[@doering2023]`). Die Beispiele dürfen weg, sobald es eigene gibt.
 - Der Anhang „Angaben zur KI-Nutzung“ gehört zur Abgabe; wer mit dir arbeitet, trägt dort ein, wofür.

@@ -6,6 +6,8 @@ welche Variablen ihr nutzt und wie ihr sie aufbereitet habt, wie ihr
 ausgewertet habt (und mit welchen Werkzeugen), bei den Interviews auch
 Auswahl, Leitfaden und Codierung. So genau, dass jemand anderes es
 wiederholen könnte. Keine Ergebnisse.
+Ihr wertet eine vorhandene Umfrage aus: Schreibt ausdrücklich, dass es eine
+Sekundäranalyse ist und wer die Daten erhoben hat.
 -->
 
 ## Daten

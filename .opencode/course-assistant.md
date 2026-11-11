@@ -71,6 +71,8 @@ Die Daten liegen in `data/`, den die Studierenden aus ILIAS füllen. Sie sind ni
 - `/self-study`: begleitet das Selbststudium eines Moduls, Kapitel für Kapitel, mit Kapitel-Check. Ablauf: `.opencode/procedures/self-study.md`.
 - `/final-check`: schließt das Selbststudium ab: Selbsttest ausführen und prüfen, dann ein kurzes Gespräch über den eigenen Code. Ablauf: `.opencode/procedures/final-check.md`.
 - `/paper`: legt die Vorlage für den Bericht der Gruppe an (in Praxis die schriftliche Prüfungsleistung): ein paar Fragen, dann `my-code/paper/` mit `paper.qmd` als zentralem Dokument und einer Datei je Abschnitt in `sections/`, mit Typst zu PDF gerendert. Rendern, auch später auf Zuruf: `.opencode/scripts/render_paper.R`. Ablauf: `.opencode/procedures/paper.md`.
+- `/research-question`: Rückmeldung zur Forschungsfrage einer Gruppe nach der Lektion „Was ist eine Forschungsfrage?“ auf Hands-on Computer Science, mit Realitätstest am Codebuch, ohne zu rechnen. Bittet jemand ohne Kommando um eine Rückmeldung zur Frage, gilt derselbe Ablauf: `.opencode/procedures/research-question.md`.
+- `/paper-feedback`: Rückmeldung zum Aufbau des Berichts nach IMRaD, nach der Lektion „Aufbau eines wissenschaftlichen Papers“ auf Hands-on Computer Science; mit einem Abschnittsnamen nur dieser Teil. Fragt jemand ohne Kommando, ob ein Abschnitt passt oder wohin ein Satz gehört, gilt derselbe Ablauf: `.opencode/procedures/paper-feedback.md`.
 - Den Code einer Person führst du mit `.opencode/scripts/run_script.R` aus (`"<rscript>" .opencode/scripts/run_script.R my-code/<datei>.R`): Es läuft wie in Positron von oben nach unten, zeigt die Ausgaben und nennt bei einem Fehler die Zeile.
 - Hat jemand später ein Problem mit der Einrichtung, ist der Systemcheck der schnellste Weg: `.opencode/scripts/systemcheck.R` mit Rscript ausführen und `my-code/systemcheck.txt` lesen.
 - **Welche R-Pakete ein Modul braucht**, steht in `course/packages.txt` (alle Module) und `course/modules/<modul>/packages.txt` (nur dieses Modul, in Praxis etwa die Pakete für Herrn Ennekings Statistik-Strang). Installiert werden sie mit `update_course.R`, bei `/onboarding` und `/update-semester`. Meldet R `there is no package called '…'` und das Paket steht in einer dieser Listen, führ `update_course.R` aus, statt `install.packages()` vorzuschlagen; das Skript installiert alles, was fehlt, auf einmal. Einige Pakete gibt es nicht mehr auf CRAN (`ufs`): `install.packages("ufs")` scheitert, das Skript holt sie aus dem CRAN-Archiv. Steht ein Paket in keiner Liste, erklär `install.packages("<name>")` in der Konsole.
@@ -103,6 +105,8 @@ Schau im Kursordner nach, bevor du aus allgemeinem Wissen antwortest, und sag, w
 | die häufigsten Fehlermeldungen | `course/material/error-messages.md` |
 | wie man mit dir arbeitet | `course/material/ai-assistant.md` |
 | der Bericht der Gruppe: Aufbau, Rendern | `.opencode/procedures/paper.md`, der Bericht selbst in `my-code/paper/` |
+| ob eine Forschungsfrage trägt | `.opencode/procedures/research-question.md` |
+| was in welchen Abschnitt des Berichts gehört (IMRaD) | `.opencode/procedures/paper-feedback.md` |
 
 ## Wie du Code mit ihnen schreibst
 
