@@ -12,7 +12,9 @@ Stand: 2026-11-11, Sitzung 2
   - OpenCode und der Kursassistent: https://hands-on-computer-science.de/ds/de/items/opencode-course-assistant/
   - Erste Schritte mit Quarto (mit Beispiel-Paper zum Herunterladen): https://hands-on-computer-science.de/ds/de/items/quarto-first-steps/
   - Was ist eine Forschungsfrage?: https://hands-on-computer-science.de/ds/de/items/research-questions/
+  - Übung: Die eigene Forschungsfrage schärfen (vom Spezialthema zur Frage, Realitätstest mit `/research-question`): https://hands-on-computer-science.de/ds/de/items/research-question-exercise/
   - Aufbau eines wissenschaftlichen Papers (IMRaD, Übung an einem Paper): https://hands-on-computer-science.de/ds/de/items/paper-structure/
+  - Übung: Den eigenen Bericht mit Quarto anlegen (`/paper`, Zahl aus R, Zitat, erste Abbildung, `/paper-feedback`): https://hands-on-computer-science.de/ds/de/items/quarto-paper-exercise/
   - Die Milch-Umfrage: https://hands-on-computer-science.de/ds/de/items/milk-chocolate-survey/
   - Datenanalyse mit R in Kürze (Folien): https://hands-on-computer-science.de/ds/de/items/data-analysis-with-r-slides/
   - R im Selbststudium: fünf Übungen im Browser (https://hands-on-computer-science.de/ds/de/items/survey-exercise-first-look/ und die folgenden) und ein Selbsttest (https://hands-on-computer-science.de/ds/de/items/survey-self-test/). Sie entsprechen `/self-study` und `/final-check` hier im Kursordner; beide Wege gelten.
